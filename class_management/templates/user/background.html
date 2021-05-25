@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Course management</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="main-header">
+                <div class="main-title">Courese management</div>
+                <div class="sub-title">Welcome to our Course Management System</div>
+                {% block welcome_message %}
+                {% endblock %}
+            </div>
+            <div class="login-container">
+                {% block login_container %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
