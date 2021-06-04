@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+  
+</head>
+<style>
+     html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background: url(/static/img/yoga.jpeg) no-repeat 0px 0px;
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+        }
+</style>
+
+
+<body>
+<div id="loginDiv">
+    <form action="{% url 'user_profile:login' %}" id="form" method="post" >
+        {% csrf_token %}
+        <h1 style="text-align: center;color: aliceblue;">Login</h1>
+        <p>User Name:<input name="user" type="text"><label></label></p>
+        <p>Password:<input name="pwd" type="password"><label></label></p>
+        <div style="text-align: center;margin-top: 30px;">
+            <button class="button login_btn" >Login</button>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <a href="{% url 'user_profile:register' %}" class="button">Register</a>
+        </div>
+    </form>
+    <div style="color: red">
+        {{ error }}
+    </div>
+</div>
+</body>
+</html>

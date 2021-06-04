@@ -1,0 +1,24 @@
+
+Project Basic
+
+1.  Login system (student and admin)
+    django session for web (auth option)
+    token, app and wechat app 
+
+2.  database list 
+    class name  
+    time
+    no. of students
+    Instructor
+    Class Bio
+
+3.  
+    class id
+    student id
+
+    crud when super user login
+
+4. Learn fullcalendar
+
+
+

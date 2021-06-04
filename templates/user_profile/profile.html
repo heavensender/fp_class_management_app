@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load extratags %}
+{% block customstyle %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    
+{% endblock %}
+{% block content %}
+    <div class="center-content">
+       <div class="profile">
+           <p>Personal Infor</p>
+           <form method="post" action="{% url 'user_profile:profile' %}" id="form1">
+               <input name="id" style="display: none;" value="{{ user.id }}"/>
+
+
+
+               <div class="right">
+
+                   <div>
+                       <span>User&nbsp&nbspName:</span>&nbsp&nbsp&nbsp<input name="username" value="{{ user.username |format_none }}" readonly>
+                   </div>
+                   <div>
+                       <span>Gen&nbsp&nbspder:</span>&nbsp&nbsp&nbsp
+                       <label style="width: 80px;margin-left: 40px"><input name="sex" type="radio" value="0" {% if user.sex == 0 %} checked {% endif %}/>Male </label>
+                       <label><input name="sex" type="radio" value="1" {% if user.sex == 1 %} checked {% endif %}/>Female </label>
+                   </div>
+                   <div>
+                       <span>Address&nbsp:</span>&nbsp&nbsp&nbsp<input name="address" value="{{ user.address | format_none}}">
+                   </div>
+                   <div>
+                       <span>PH&nbsp:</span><input name="phone" value="{{ user.phone | format_none }}">
+                   </div>
+                   <div>
+                       <input type="password" name="password" id="password">
+
+                       <button type="button" class="btn btn-info" onclick="change_password()">
+                                   Change Password
+                           </button>
+                   </div>
+
+                   <div class="show-submit">
+                       <input type="submit" class="btn btn-info">
+                   </div>
+               </div>
+               {% csrf_token %}
+           </form>
+       </div>
+
+    </div>
+{% endblock %}
+
+    {% block customjs %}
+    <script type="application/javascript">
+
+    function change_password() {
+        var password = $("#password").val()
+        $.post("{% url 'user_profile:reset-password' %}",{"password":password,"csrfmiddlewaretoken":"{{ csrf_token }}"},function(result){
+            alert("Successfully changed");
+          });
+
+    }
+
+    </script>
+{% endblock %}
