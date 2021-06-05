@@ -12,80 +12,36 @@
     <script src="{% static 'fullcalendar/lib/main.js' %}"></script>
 
 {% endblock %}
-
 {% block content %}
-<div style="margin: auto;width: 100%">
-    <table class="table table-bordered">
-        <div style="clear: both"></div>
-        <thead>
-            <tr>
-                <th>Class</th>
-                <th>Time</th>
-                <th>No.Students</th>
-                <th>Instructor</th>
-                <th>Class Infor</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for item in paginator.object_list %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.class_time }}</td>
-                <td>{{ item.person_num }}</td>
-                <td>{{ item.teacher_name }}</td>
-                <td>{{ item.description }}</td>
-                <td>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <div id='calendar'></div>
+    </div>
 
-     <div style="width: 80%;margin: auto">
-         <ul class="pagination pagination-lg">
-            {% if paginator.has_previous %}
-                <li>
-                    <a href="{% url 'lesson-list' %}?page={{ paginator.previous_page_number }}" aria-label="Previous">
-                        <span aria-hidden="true">Previous </span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="disabled">
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">Previous</span>
-                    </a>
-                </li>
-            {% endif %}
-
-            {% for number in paginator.paginator.pager_num_range %}
-                {% if number == paginator.number %}
-                    <li class="active"><a href="{% url 'lesson-list' %}?page={{ number }}">{{ number }}</a></li>
-                {% else %}
-                    <li><a href="{% url 'lesson-list' %}?page={{ number }}" >{{ number }}</a></li>
-                {% endif %}
-            {% endfor %}
-            {% if paginator.has_next %}
-                <li>
-                    <a href="{% url 'lesson-list' %}?page={{ paginator.next_page_number }}" aria-label="Next">
-                        <span aria-hidden="true">Next</span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="disabled">
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">Next</span>
-                    </a>
-                </li>
-            {% endif %}
-         </ul>
-     </div>
-</div>
 {% endblock %}
 
-
-
 {% block customjs %}
-  
+    <script type="text/javascript">
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            header:{
+                right: 'prev,next today',
+                center: 'title',
+                left: 'month,agendaWeek,agendaDay'
+            },
+
+            events: function(start ,callback) {
+                console.log(start);
+                console.log(callback);
+                var events = {{ data | safe }};
+                callback(events);
+            },
+        });
+        calendar.render();
+      });
+
+    </script>
 
 {% endblock %}

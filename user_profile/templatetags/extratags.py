@@ -16,10 +16,6 @@ def format_none(value):
 
 @register.filter(name="cut")
 def cut(value, arg=80):
-    # text_maker = html2text.HTML2Text()
-    # text_maker.ignore_links = True
-    # text_maker.bypass_tables = True
-    # value = text_maker.handle(value)
     value = value.replace("<br></br>", "")
     value = value.replace("&nbsp;", "")
     if len(value) > arg:
