@@ -25,7 +25,7 @@ SECRET_KEY = 's$ihq=ha&gg8*snd1c8%4#d)m2k+fxx0u+gjbinqmc!w!f0ljf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['heavensender.pythonanywhere.com']
 
 AUTH_USER_MODEL = "user_profile.UserProfile"
 # Application definition
